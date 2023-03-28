@@ -1,10 +1,12 @@
 import os, json, sys, zipfile, datetime, shutil
 from lab_4b_utils import set_backup_env, DATE_FORMAT, HISTORY_FILE_NAME, PATH_POSITION, JSON_TIMESTAMP, JSON_FILENAME, BACKUP_NAME, JSON_SOURCE
 
+# Domyślna lokalizacja do przywrócenia kopii zapasowej
 DEFAULT_RESTORE = './Test'
 
 
-def restore_from():
+# Funkcja zwracająca ścieżkę, do której zostanie przywrócona kopia zapasowa
+def restore_to():
     args = sys.argv
     if len(args) <= PATH_POSITION:
         return DEFAULT_RESTORE
@@ -14,9 +16,12 @@ def restore_from():
 
 set_backup_env()
 BACKUPS_DIR = os.environ.get(BACKUP_NAME)
-PATH_TO_RESTORE = restore_from()
+
+# Ścieżka, do której zostanie przywrócona kopia zapasowa
+PATH_TO_RESTORE = restore_to()
 
 
+# Funkcja zwracająca listę wszystkich kopii zapasowych wraz z ich danymi zapisanymi w pliku history
 def get_backups():
     backups_file = os.path.join(BACKUPS_DIR, HISTORY_FILE_NAME)
     if not os.path.exists(backups_file):
@@ -27,6 +32,7 @@ def get_backups():
     return backups
 
 
+# Wyświetla wszystkie kopie zapasowe z listy backups
 def show_backups(backups):
     if not backups:
         print("Bark kopii zapasowych w tej lokalizacji")
@@ -37,21 +43,24 @@ def show_backups(backups):
             print(f'{i}. {backup[JSON_TIMESTAMP]} - {backup[JSON_SOURCE]} - {backup[JSON_FILENAME]}')
 
 
+# Funkcja do wyboru kopii zapasowej do przywrócenia
 def which_backup(backups):
     while True:
         choice = int(input("Wybierz kopię zapasową do przywrócenia: "))
-        if len(backups) > choice >=0:
+        if len(backups) > choice >= 0:
             return choice
         else:
             print("Kopia zapasowa nie istnieje, spróbuj ponownie")
 
 
+# Funkcja tworząca ścieżkę do przywracania kopii zapasowej oraz usuwająca starą ścieżkę, jeśli istnieje
 def restore_to_dir():
     if os.path.exists(PATH_TO_RESTORE):
         shutil.rmtree(PATH_TO_RESTORE)
     os.makedirs(PATH_TO_RESTORE)
 
 
+# Funkcja przywracająca kopię zapasową o podanej nazwie
 def restore(backup, backup_path):
     with zipfile.ZipFile(backup_path, "r") as zipped:
         zipped.extractall(PATH_TO_RESTORE)

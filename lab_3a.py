@@ -1,6 +1,7 @@
 import json, sys
 
 
+# Funkcja, która znajduje najczęściej występujący znak w tekście.
 def find_most_frequent_char(content):
     char_counter = {}
     for char in content:
@@ -11,6 +12,7 @@ def find_most_frequent_char(content):
     return max(char_counter, key=char_counter.get)
 
 
+# Funkcja, która znajduje najczęściej występujące słowo w tekście.
 def find_most_frequent_word(words):
     word_counter = {}
     for word in words:
@@ -21,6 +23,7 @@ def find_most_frequent_word(words):
     return max(word_counter, key=word_counter.get)
 
 
+# Funkcja, która analizuje podany plik i zwraca wyniki w postaci słownika.
 def analyze_file(file_path):
     with open(file_path, "r") as file:
         content = file.read()
@@ -43,11 +46,11 @@ def analyze_file(file_path):
     }
 
 
-def process_file(args):
+def run_lab_3a(args):
     file_path = args[1]
     result = analyze_file(file_path)
     print(json.dumps(result))
 
 
 if __name__ == "__main__":
-    process_file(sys.argv)
+    run_lab_3a(sys.argv)
