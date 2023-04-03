@@ -7,7 +7,7 @@ PATH_POSITION = 1
 BACKUP_NAME = "BACKUPS_DIR"
 
 # Domyślna ścieżka do katalogu z backupami
-DEFAULT_BACKUP_PATH = "./backups"
+DEFAULT_BACKUP_PATH = ".backups"
 
 # Format daty i czasu używany do tworzenia kopii zapasowych
 DATE_FORMAT = "%Y%m%d-%H%M%S"

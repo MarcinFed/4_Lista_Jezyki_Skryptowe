@@ -72,7 +72,6 @@ def calculate_data(files):
 
 def run_lab_3b(path):
     files_data = files_data_array(path[1])
-    calculate_data(files_data)
     result = calculate_data(files_data)
     print("Number of files read:", result[LINES_NUMBER])
     print("Total number of lines:", result[LINES_NUM])

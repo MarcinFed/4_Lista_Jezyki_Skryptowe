@@ -19,8 +19,7 @@ def check_length(args):
 # funkcja sprawdzająca poprawność parametru wywołania skryptu
 def check_command(command):
     if command not in COMMANDS_ARRAY:
-        raise Exception(f"{command} nie jest parametrem obsługiwanym przez skrypt,"
-                        f" użyj {DIRECTORY} lub {EXECUTABLE}")
+        raise Exception(f"{command} nie jest parametrem obsługiwanym przez skrypt, użyj {DIRECTORY} lub {EXECUTABLE}")
 
 
 # funkcja sprawdzająca, czy dany plik jest plikiem wykonywalnym
@@ -63,7 +62,7 @@ def run_lab_2(args):
 
     if run_command == DIRECTORY:
         print_path_directories(path_directories)
-    if run_command == EXECUTABLE:
+    elif run_command == EXECUTABLE:
         print_path_executables(path_directories)
 
 
